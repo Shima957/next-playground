@@ -1,13 +1,15 @@
 import { VFC } from 'react';
+import Loading from '../Loading';
 
 type Props = {
   size: 'sm' | 'md' | 'lg';
   styleType: 'primary' | 'secondary';
   title: string;
   type: 'button' | 'submit';
+  isLoading?: boolean;
 };
 
-const Button: VFC<Props> = ({ size, styleType, title, type }) => {
+const Button: VFC<Props> = ({ size, styleType, title, type, isLoading }) => {
   const buttonSize = (size: 'sm' | 'md' | 'lg') => {
     if (size === 'sm') return 'w-24';
     if (size === 'md') return 'w-36';
@@ -23,11 +25,14 @@ const Button: VFC<Props> = ({ size, styleType, title, type }) => {
   return (
     <button
       type={type}
-      className={`p-2 rounded-md ${styleType === 'primary' && primary} ${
-        styleType === 'secondary' && secondary
-      } ${buttonSize(size)}`}
+      disabled={isLoading}
+      className={`flex justify-center items-center h-10 px-2 rounded-md disabled:cursor-not-allowed disabled:opacity-50
+        ${styleType === 'primary' && primary}
+        ${styleType === 'secondary' && secondary}
+        ${buttonSize(size)}
+      `}
     >
-      {title}
+      {isLoading ? <Loading /> : title}
     </button>
   );
 };
