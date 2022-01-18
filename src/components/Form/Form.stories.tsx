@@ -36,7 +36,7 @@ export const ValidationError: Story = {
       delay: 100,
     });
 
-    await userEvent.type(screen.getByLabelText('password'), 'pass', {
+    await userEvent.type(screen.getByLabelText('パスワード'), 'pass', {
       delay: 100,
     });
 

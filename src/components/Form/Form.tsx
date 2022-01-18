@@ -1,43 +1,38 @@
 import { VFC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '../Button/Button';
-import Input from '../Input/Input';
 
 type FormValue = {
   email: string;
   password: string;
 };
 
-type Props = {
-  login: jest.Mock<
-    Promise<{
-      email: any;
-      password: any;
-    }>
-  >;
-};
-
-const Form: VFC<Props> = ({ login }) => {
+const Form: VFC = () => {
   const methods = useForm<FormValue>();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
   } = methods;
-  const onSubmit = (data: FormValue) => login(data.email, data.password);
+  const onSubmit = (data: FormValue) => console.log(data);
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className='w-[360px] border border-gray-300 p-4 rounded-md space-y-2'>
-          <label htmlFor='email'>email</label>
+    <div className='w-[360px] border border-gray-300 p-4 rounded-md space-y-2'>
+      <h2 className='text-center text-xl font-bold'>ログイン</h2>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className='space-y-2'
+        >
+          <label htmlFor='email'>メールアドレス</label>
           <input
             id='email'
             {...register('email', {
-              required: 'required',
+              required: 'メールアドレスは必須です',
               pattern: {
                 value: /\S+@\S+\.\S+/,
-                message: 'Entered value does not match email format',
+                message: '正しい書式で入力してください',
               },
             })}
             type='email'
@@ -52,15 +47,15 @@ const Form: VFC<Props> = ({ login }) => {
             </span>
           )}
           <label htmlFor='password' className='block'>
-            password
+            パスワード
           </label>
           <input
             id='password'
             {...register('password', {
-              required: 'required',
+              required: 'パスワードは必須です',
               minLength: {
                 value: 5,
-                message: 'min length is 5',
+                message: 'パスワードは5文字以上です',
               },
             })}
             type='password'
@@ -79,14 +74,14 @@ const Form: VFC<Props> = ({ login }) => {
               type='submit'
               title='キャンセル'
               styleType='secondary'
-              size='md'
+              size='sm'
             />
 
-            <Button type='submit' title='確定' styleType='primary' size='md' />
+            <Button type='submit' title='確定' styleType='primary' size='sm' />
           </div>
-        </div>
-      </form>
-    </FormProvider>
+        </form>
+      </FormProvider>
+    </div>
   );
 };
 
