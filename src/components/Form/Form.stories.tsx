@@ -22,7 +22,7 @@ export const Success: Story = {
   },
 };
 
-export const Error: Story = {
+export const RequiredError: Story = {
   play: async ({ canvasElement }) => {
     const screen = within(canvasElement);
     userEvent.click(screen.getByText('確定'));
