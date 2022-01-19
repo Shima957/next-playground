@@ -1,11 +1,12 @@
-import { ComponentStoryObj } from '@storybook/react';
-import { userEvent, waitFor, within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 import Form from './Form';
 
+type Meta = ComponentMeta<typeof Form>;
 type Story = ComponentStoryObj<typeof Form>;
 
-export default { component: Form };
+const Meta: Meta = { component: Form };
+export default Meta;
 
 export const Success: Story = {
   play: async ({ canvasElement }) => {
@@ -15,7 +16,7 @@ export const Success: Story = {
       delay: 100,
     });
 
-    await userEvent.type(screen.getByLabelText('password'), 'password', {
+    await userEvent.type(screen.getByLabelText('パスワード'), 'password', {
       delay: 100,
     });
     userEvent.click(screen.getByText('確定'));
