@@ -23,6 +23,7 @@ export default function Home() {
   return (
     <div>
       <h1>hello {data.id}</h1>
+      <h1>test</h1>
       <Link href='/2'>
         <a>go 2</a>
       </Link>
