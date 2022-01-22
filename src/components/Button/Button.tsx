@@ -7,9 +7,17 @@ type Props = {
   title: string;
   type: 'button' | 'submit';
   isLoading?: boolean;
+  onClick?: () => void;
 };
 
-const Button: VFC<Props> = ({ size, styleType, title, type, isLoading }) => {
+const Button: VFC<Props> = ({
+  size,
+  styleType,
+  title,
+  type,
+  isLoading,
+  onClick,
+}) => {
   const buttonSize = (size: 'sm' | 'md' | 'lg') => {
     if (size === 'sm') return 'w-24';
     if (size === 'md') return 'w-36';
@@ -25,8 +33,9 @@ const Button: VFC<Props> = ({ size, styleType, title, type, isLoading }) => {
   return (
     <button
       type={type}
+      onClick={onClick}
       disabled={isLoading}
-      className={`flex justify-center items-center h-10 px-2 rounded-md disabled:cursor-not-allowed disabled:opacity-50
+      className={`flex justify-center items-center h-10 px-2 rounded-md font-bold disabled:cursor-not-allowed disabled:opacity-50
         ${styleType === 'primary' && primary}
         ${styleType === 'secondary' && secondary}
         ${buttonSize(size)}
