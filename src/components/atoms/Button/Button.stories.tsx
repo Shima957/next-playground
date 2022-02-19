@@ -7,14 +7,19 @@ export default { component: Button };
 
 export const Primary: Story = {
   args: {
-    title: 'ボタン',
-    styleType: 'primary',
+    variant: 'primary',
     type: 'button',
     size: 'md',
     isLoading: false,
+    children: 'ボタン',
   },
 };
 
 export const Secondary: Story = {
-  args: { title: 'ボタン', styleType: 'secondary', type: 'button', size: 'md' },
+  args: {
+    children: 'ボタン',
+    variant: 'secondary',
+    type: 'button',
+    size: 'md',
+  },
 };
